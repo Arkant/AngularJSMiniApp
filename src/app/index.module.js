@@ -8,8 +8,9 @@ import uiRouter from '@uirouter/angularjs';
 import coreModule from './core/core.module';
 import indexComponents from './index.components';
 import indexRoutes from './index.routes';
-import mainModule from './pages/main/main.module';
 
+import mainModule from './pages/main/main.module';
+import converterModule from './pages/currency-converter/converter.module';
 
 const App = angular.module(
   "angularApp", [
@@ -28,7 +29,8 @@ const App = angular.module(
     indexRoutes.name,
 
     // pages
-    mainModule.name
+    mainModule.name,
+    converterModule.name
 
   ]
 );
