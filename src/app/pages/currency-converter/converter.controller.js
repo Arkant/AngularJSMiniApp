@@ -1,10 +1,11 @@
 'use strict';
 
 export default class currencyController {
-    constructor($scope, $rootScope, CurrencyService, converterConstants) {
+    constructor($scope, $rootScope, CurrencyService, converterConstants, syncDataService) {
         'ngInject';
         this.CurrencyService = CurrencyService;
         this.rootScope = $rootScope;
+        this.syncDataService = syncDataService;
 
         this.currency = CurrencyService.getResponse();
         this.currencyObj = CurrencyService.getList();
@@ -65,7 +66,8 @@ export default class currencyController {
         };
         const userDeals = this.CurrencyService.getUserDeals(objValue);
 
-        this.rootScope.currentUserDeals.push(userDeals);
+        this.syncDataService.addDealToFirebase(userDeals);
+        this.syncDataService.getAllFromFirebase(); // it's just for check. It show all deals in console
    }
 
 }
