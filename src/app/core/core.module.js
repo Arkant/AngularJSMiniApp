@@ -19,6 +19,7 @@ import syncDataService from './services/sync-data.service';
 import authenticationService from './services/authentication.service';
 import userProfileService from './services/user-profile.service';
 import weatherAPIService from './services/weatherAPI.service';
+import homeService from './services/home.service';
 
 validationTestDirective(shared);
 preloaderDirective(shared);
@@ -38,5 +39,6 @@ syncDataService(shared);
 authenticationService(shared);
 userProfileService(shared);
 weatherAPIService(shared);
+homeService(shared);
 
 export default shared;
