@@ -1,3 +1,5 @@
+<preloader show="admCont.listOfUsers === undefined || !admCont.listOfUsers.$resolved"></preloader>
+
 <div class="container">
   <div class="header">
     <h1 class="display-4 text-center">Admin Page</h1>
@@ -49,7 +51,8 @@
 
           <td>
             <div class="make-switch switch-mini">
-              <label><input type="checkbox"></label>
+              <label><input type="checkbox" ng-checked ="value.role === admin" ng-click='admCont.changeUserRole(key)'
+                ></label>
             </div>
           </td>
 
@@ -60,7 +63,7 @@
             </div>
           </td>
 
-          <td><i class="fas fa-history tabble__icon" ng-click="admCont.setSelectedUser(item.id)" ui-sref="transactionsList"></i></td>
+          <td><i class="fas fa-history tabble__icon" data-toggle="modal" ng-click="admCont.setSelectedUser(key)" data-target="#userHistoryModal"></i></td>
           
           <td><i class="fas fa-user-circle tabble__icon" ui-sref="profile"></i></td>
 
@@ -69,3 +72,5 @@
     </table>
   </div>
 </div>
+
+<admin-modal-component></admin-modal-component>

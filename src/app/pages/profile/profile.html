@@ -10,7 +10,7 @@
             <p class='email'><span>email: </span><span>{{currentUser.email}}</span></p>
             <button class="btn btn-info" type="button" ui-sref="editProfile">Edit profile</button>
         </div>
-        <img class="col-xs-5 col-sm-5 col-md-5 col-lg-5 ava" alt="avatar" ng-src='{{formInfo.ava || "https://whatsism.com/uploads/posts/2018-07/1530544023_n6fgwzftnvg.jpg"}}'
+        <img class="col-xs-5 col-sm-5 col-md-5 col-lg-5 ava" alt="avatar" ng-src="{{currentUser.ava || 'https://whatsism.com/uploads/posts/2018-07/1530544023_n6fgwzftnvg.jpg'}}"
             data-holder-rendered="true">
     </div>
 

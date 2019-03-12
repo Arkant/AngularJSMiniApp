@@ -21,7 +21,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle menu" href="#" role="button" id="dropdownMenuLink"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{headerCtrl.currentUser.firstName}} {{headerCtrl.currentUser.lastName}}
+            {{headerCtrl.currentUser.firstName || 'User '}} {{headerCtrl.currentUser.lastName || 'Name'}}
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <a class="dropdown-item" href="#" ui-sref="profile">Profile</a>

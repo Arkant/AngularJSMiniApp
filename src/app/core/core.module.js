@@ -8,6 +8,7 @@ import customSort from './directives/directive.table';
 
 import constants from './services/constants';
 import storeFactory from './services/store.factory';
+import sharedAdminFactory from './services/share-admin.factory';
 import usersMocksService from './services/user.mocks.service';
 import resolverProvider from './services/resolver.provider';
 
@@ -25,6 +26,7 @@ preloaderDirective(shared);
 
 constants(shared);
 storeFactory(shared);
+sharedAdminFactory(shared);
 usersMocksService(shared);
 resolverProvider(shared);
 customSort(shared)

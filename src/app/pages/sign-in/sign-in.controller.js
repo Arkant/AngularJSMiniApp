@@ -1,18 +1,18 @@
+/* eslint-disable no-console */
 function SignInController($scope, authenticationService) {
   'ngInject';
-  $scope.warning = "";
   $scope.signIn = () => {
+    $scope.warning = "";
     const login = $scope.user.email;
-    const password = $scope.user.password;  
-    if (!authenticationService.signInToFirebase(login, password)) {
-      $scope.showWarning();
-    } else {
-      $scope.warning = "";
-    }
+    const password = $scope.user.password;
+
+    authenticationService.signInToFirebase(login, password)
+    .then(function(response) {
+      if (response) {
+        $scope.warning = response.message;
+      }
+    })
   };
-  $scope.showWarning = () => {
-    $scope.warning = "Wrong E-mail or password"
-  }
 }
 
 export default SignInController;

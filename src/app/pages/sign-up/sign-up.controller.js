@@ -1,11 +1,17 @@
 'use strict';
 
 export default class SignUpController {
-  constructor(authenticationService) {
+  constructor($scope, authenticationService) {
     'ngInject';
-
+    // #fix add user's name and last name to firebase
     this.addUser = () => {
-      authenticationService.signUpToFirebase(this.newUser.login, this.newUser.password);
+      $scope.warning = "";
+      authenticationService.signUpToFirebase(this.newUser)
+      .then(function(response) {
+        if (response) {
+          $scope.warning = response.message;
+        }
+      })
     }
   }  
 }

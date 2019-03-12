@@ -1,0 +1,41 @@
+<div class="modal fade" id="userHistoryModal" tabindex="-1" role="dialog" aria-labelledby="userHistoryModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userHistoryModalTitle">User's transactions history</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="border table table-striped rounded table-hover">
+                    <thead>
+                    <tr class="table-row">
+                        <th>Date</th>
+                        <th>Currency From</th>
+                        <th>Currency To</th>
+                        <th>Commission</th>
+                        <th>Rate</th>
+                        <th>Amount From</th>
+                        <th>Amount To</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="table-row" ng-repeat="el in adminModalCtrl.data">
+                        <td>{{el.date}}</td>
+                        <td>{{el.currencyFrom}}</td>
+                        <td>{{el.currencyTo}}</td>
+                        <td>{{el.commission}}</td>
+                        <td>{{el.rate}}</td>
+                        <td>{{el.amountFrom}}</td>
+                        <td>{{el.amountTo}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

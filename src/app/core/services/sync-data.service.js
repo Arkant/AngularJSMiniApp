@@ -43,7 +43,8 @@ export default function (app) {
           firstName: $rootScope.currentUser.firstName,
           lastName: $rootScope.currentUser.lastName,
           phone: $rootScope.currentUser.phone,
-          ava: $rootScope.currentUser.ava,
+          email: $rootScope.currentUser.email,
+          ava: $rootScope.currentUser.ava
         })
       }
 
@@ -66,11 +67,9 @@ export default function (app) {
           .then(console.log($rootScope.listOfUsers));
       }
 
-      this.getAllDealsFromFirebase = () => {
+      this.getCheckedUserDealsFromFirebase = userID => {
         const ref = firebase.database().ref();
-        $rootScope.listOfDeals = $firebaseObject(ref.child('listOfDeals'));
-        $rootScope.listOfDeals.$loaded()
-          .then(console.log($rootScope.listOfDeals));
+        return $firebaseArray(ref.child('listOfDeals').child(userID));
       }
 
       this.getProfileImageRef = () => {
@@ -88,7 +87,8 @@ export default function (app) {
       }
 
       this.changeUserRole = (uid, role) => {
-        $rootScope.listOfUsers.uid.role = role;
+        console.log(role);
+        $rootScope.listOfUsers[uid].role = role;
 
         const ref = firebase.database().ref()
           .child('listOfUsers')

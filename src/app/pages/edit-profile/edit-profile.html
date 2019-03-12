@@ -29,11 +29,11 @@
                             </div>
                             <p ng-show="profile.email.$error.minlength" class="alert alert-danger">Email is too short.</p>
                             <p ng-show="profile.email.$error.maxlength" class="alert alert-danger">Email is too long.</p>
-                            <!-- <p ng-show="profile.email.$invalid" class="alert alert-danger">Enter a valid email, e.g. vasya@gmail.com</p> -->
+                            <p ng-show="profile.email.$error.email" class="alert alert-danger">Enter a valid email, e.g. vasya@gmail.com</p>    
             
                             <div class="editItem">
                                 <p class="item col-xs-4 col-md-4 col-lg-4">email: </p><input class='col-xs-8 col-md-8 col-lg-8' ng-class="{ 'has-error' : profile.email.$invalid && !profile.email.$pristine }"
-                                    type="email" name="email" ng-model='formInfo.email' required ng-minlength='4' ng-maxlength='30'>
+                                    type="email" name="email" ng-disabled='true' ng-model='formInfo.email' ng-minlength='4' ng-maxlength='30'>
                             </div>
                 </div>
                 <div class="saveChanges">
@@ -46,8 +46,8 @@
             </div>
 
             <div class="cardAva col-xs-4 col-md-4 col-lg-4">
-                <img type="image" class='ava' ng-src="{{formInfo.ava || 'https://whatsism.com/uploads/posts/2018-07/1530544023_n6fgwzftnvg.jpg'}}">
-                <input ng-hide='true' type="file" ng-model='formInfo.ava' ng-click="onFileChanged($event)" id ='fileInput'>
+                <img type="image" class='ava' ng-model='formInfo.ava' ng-src="{{formInfo.ava || 'https://whatsism.com/uploads/posts/2018-07/1530544023_n6fgwzftnvg.jpg'}}">
+                <input ng-hide='true' type="file"  onchange="angular.element(this).scope().onFileChanged(this.files)" id ='fileInput'>
                 <label class="btn btn-outline-info changeAva" for='fileInput'>Select image</label>
             </div>
         </form>

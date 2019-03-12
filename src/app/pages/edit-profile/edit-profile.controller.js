@@ -3,32 +3,42 @@
 function EditProfileController($log, $scope, $rootScope, userProfileService, syncDataService, $state) {
   'ngInject';
   $scope.success = false;
-  if($rootScope.currentUser){
+  const reader = new FileReader();
+  let file = null;
+
+  if ($rootScope.currentUser) {
     $scope.formInfo = userProfileService.createFormInfo();
   }
- 
-  syncDataService.getAllUsersFromFirebase();
-  
-  $scope.submitForm =  function(data){
+
+  $scope.submitForm = function (data) {
     if ($scope.profile.$valid) {
       userProfileService.saveToCurrentUser(data);
       syncDataService.saveUserInfoToFirebase($rootScope.currentUserId);
+      
+      if (file) {
+        userProfileService.setProfileImage(file);
+      }
       $scope.success = true;
-      setTimeout(function(){
+      setTimeout(function () {
         $state.go('profile');
-        syncDataService.getAllUsersFromFirebase();
       }, 1500);
     }
   }
 
-  $scope.onFileChanged = function(event) {
-    const file = event.target.files[0];
+  $scope.onFileChanged = function (files) {
+    const ava = document.querySelector('.ava');
 
-    if (!file) {
+    if (!files[0]) {
       return;
     }
 
-    userProfileService.setProfileImage(file)
+    file = files[0];
+    reader.readAsDataURL(file);
+    reader.onloadend = function () {
+      $scope.formInfo.ava = reader.result;
+      ava.src = reader.result;
+
+    }
   }
 
   $log.debug('Hello from EDIT-PROFILE controller!');
