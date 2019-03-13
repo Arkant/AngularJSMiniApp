@@ -1,24 +1,32 @@
 'use strict';
 
-function HomeController($scope, workWithDate, $rootScope, syncDataService, $state) {
-  'ngInject';
+export default class HomeController {
+  constructor($scope, workWithDate, $rootScope, syncDataService, $state) {
+    'ngInject';
+    this.scope = $scope;
+    this.rootScope = $rootScope;
+    this.state = $state;
+    this.syncDataService = syncDataService;
+    this.workWithDate = workWithDate;
 
-  if (!$rootScope.currentUserId) {
-    $state.go('sign-up');
-  } else {
-    $scope.currentUserDeals = syncDataService.getDealsFromFirebase();
-    $scope.dealsAreLoaded = false;
-
-    $scope.currentUserDeals.$loaded(() => {
-      workWithDate.transformData($scope.currentUserDeals);
-      $scope.dealsAreLoaded = true;
-    });
+    this.sort = {
+      sortingOrder: 'date',
+      reverse: false
+    };
+    this.init();
   }
 
-  $scope.sort = {
-    sortingOrder: 'date',
-    reverse: false
-  };
-}
+  init() {
+    if (!this.rootScope.currentUserId) {
+      this.state.go('sign-up');
+    } else {
+      this.currentUserDeals = this.syncDataService.getDealsFromFirebase();
+      this.dealsAreLoaded = false;
 
-export default HomeController;
+      this.currentUserDeals.$loaded(() => {
+        this.workWithDate.transformData(this.currentUserDeals);
+        this.dealsAreLoaded = true;
+      });
+    }
+  }
+}
