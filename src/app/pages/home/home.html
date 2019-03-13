@@ -1,5 +1,5 @@
 <section class="container-fluid">
-  <preloader show="homeCtrl.currentUserDeals === undefined || !homeCtrl.dealsAreLoaded"></preloader>
+  <preloader show="homeCtrl.currentUserDeals === undefined || !homeCtrl.currentUserDeals.$resolved"></preloader>
   <div class="row">
     <article class="col-3 sidebar">
         <weather-component></weather-component>
