@@ -22,7 +22,7 @@
                     </thead>
                     <tbody>
                     <tr class="table-row" ng-repeat="el in adminModalCtrl.data">
-                        <td>{{el.date}}</td>
+                        <td>{{el.date.toLocaleDateString()}}</td>
                         <td>{{el.currencyFrom}}</td>
                         <td>{{el.currencyTo}}</td>
                         <td>{{el.commission}}</td>
