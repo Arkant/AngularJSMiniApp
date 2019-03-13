@@ -1,15 +1,17 @@
 'use strict';
 
-function HomeController($scope, homeService, $rootScope, syncDataService, $state) {
+function HomeController($scope, workWithDate, $rootScope, syncDataService, $state) {
   'ngInject';
 
   if (!$rootScope.currentUserId) {
     $state.go('sign-up');
   } else {
     $scope.currentUserDeals = syncDataService.getDealsFromFirebase();
+    $scope.dealsAreLoaded = false;
 
     $scope.currentUserDeals.$loaded(() => {
-      $scope.currentUserDeals = homeService.transformData($scope.currentUserDeals);
+      workWithDate.transformData($scope.currentUserDeals);
+      $scope.dealsAreLoaded = true;
     });
   }
 
