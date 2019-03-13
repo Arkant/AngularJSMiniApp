@@ -1,5 +1,5 @@
 <section class="container-fluid">
-  <preloader show="currentUserDeals === undefined || !dealsAreLoaded"></preloader>
+  <preloader show="homeCtrl.currentUserDeals === undefined || !homeCtrl.dealsAreLoaded"></preloader>
   <div class="row">
     <article class="col-3 sidebar">
         <weather-component></weather-component>
@@ -10,17 +10,17 @@
         <table class="border table table-striped rounded table-hover">
           <thead>
             <tr class="table-row">
-              <th custom-sort order="'date'" sort="sort">Date</th>
-              <th custom-sort order="'currencyFrom'" sort="sort">Currency From</th>
-              <th custom-sort order="'currencyTo'" sort="sort">Currency To</th>
-              <th custom-sort order="'commission'" sort="sort">Commission</th>
-              <th custom-sort order="'rate'" sort="sort">Rate</th>
-              <th custom-sort order="'amountFrom'" sort="sort">Amount From</th>
-              <th custom-sort order="'amountTo'" sort="sort">Amount To</th>
+              <th custom-sort order="'date'" sort="homeCtrl.sort">Date</th>
+              <th custom-sort order="'currencyFrom'" sort="homeCtrl.sort">Currency From</th>
+              <th custom-sort order="'currencyTo'" sort="homeCtrl.sort">Currency To</th>
+              <th custom-sort order="'commission'" sort="homeCtrl.sort">Commission</th>
+              <th custom-sort order="'rate'" sort="homeCtrl.sort">Rate</th>
+              <th custom-sort order="'amountFrom'" sort="homeCtrl.sort">Amount From</th>
+              <th custom-sort order="'amountTo'" sort="homeCtrl.sort">Amount To</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="table-row" ng-repeat="el in currentUserDeals | orderBy:sort.sortingOrder:sort.reverse">
+            <tr class="table-row" ng-repeat="el in homeCtrl.currentUserDeals | orderBy:homeCtrl.sort.sortingOrder:homeCtrl.sort.reverse">
               <td>{{el.date.toLocaleDateString()}}</td>
               <td>{{el.currencyFrom}}</td>
               <td>{{el.currencyTo}}</td>

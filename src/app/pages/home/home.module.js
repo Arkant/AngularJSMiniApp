@@ -1,9 +1,7 @@
 'use strict';
 
 import HomeComponent from './home.component';
-import HomeController from './home.controller';
 import './home.scss';
-import homeTpl from './home.html';
 
 const homePageModule = angular.module('home-module', [
   'ui.router'
@@ -16,8 +14,8 @@ const homePageModule = angular.module('home-module', [
     $stateProvider
       .state('home', {
         url: '/home',
-        controller: HomeController,
-        templateUrl: homeTpl
+        name: 'home',
+        component: 'home'
       });
   })
   .component('home', new HomeComponent());
