@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 
 import config from './index.config';
@@ -13,11 +14,6 @@ import adminModule from './pages/admin/admin.module';
 import converterModule from './pages/currency-converter/converter.module';
 import homeModule from './pages/home/home.module';
 import signUpModule from './pages/sign-up/sign-up.module';
-
-// // ==== connecting to firebase ====
-// import configFirebase from '../../env'
-// firebase.initializeApp(configFirebase);
-// // ================================
 
 const App = angular.module(
   "angularApp", [
@@ -51,7 +47,5 @@ const App = angular.module(
 App
   .config(config)
   .run(run);
-
-
 
 export default App;

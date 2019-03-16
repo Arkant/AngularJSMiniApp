@@ -8,31 +8,35 @@
             placeholder="example@mail.com"
             ng-model="su.newUser.email" 
             />
-        <small class="help-block text-danger" ng-show="regForm.email.$touched && 
-                                                       regForm.email.$invalid">
-            E-Mail address is not valid
-        </small>
-        <small class="help-block text-danger" ng-hide="warning === ''" ng-bind="warning">
-
-        </small> 
+        <div class="help-block text-danger" ng-messages="regForm.email.$error" role="alert">
+          <div ng-message="email">This field must be a valid email address.</div>
+        </div>
     </div>
     <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-3"
       ng-class="{'has-error': 'regForm.password.$touched && 
       regForm.password.$invalid'}">
       <label for="password">First Name</label>
-      <input required name="firstname" type="text" 
+      <input ng-pattern='/^[A-Za-z]+$/' ng-maxlength="20" required name="firstname" type="text" 
         class="col-xs-12 col-md-12 col-lg-12" 
         placeholder="Tomas"
         ng-model="su.newUser.firstName" 
         />
+        <div class="help-block text-danger" ng-messages="regForm.firstname.$error" role="alert">
+          <div ng-message="pattern">Use only latin letters.</div>
+          <div ng-message= "maxlength">First name is too long.</div>
+        </div>
     </div>
     <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-3">
       <label for="password">Last Name</label>
-      <input required name="lastname" ng-minlength="6" type="text" 
+      <input ng-pattern='/^[A-Za-z]+$/' ng-maxlength="20" required name="lastname" type="text" 
         class="col-xs-12 col-md-12 col-lg-12" 
         placeholder="Anderson"
         ng-model="su.newUser.lastName" 
         />
+        <div class="help-block text-danger" ng-messages="regForm.lastname.$error" role="alert">
+          <div ng-message="pattern">Use only latin letters.</div>
+          <div ng-message= 'maxlength'>Last name is too long.</div>
+        </div>
     </div>
     <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-3"
           ng-class="{'has-error': 'regForm.password.$touched && 
@@ -43,11 +47,9 @@
             placeholder="Password"
             ng-model="su.newUser.password" 
             />
-        <small class="help-block text-danger" 
-              ng-show="regForm.password.$touched && 
-              regForm.password.$invalid">
-            Password must include minimum 6 characters
-        </small> <br>
+        <div class="help-block text-danger" ng-messages="regForm.password.$error" role="alert">
+          <div ng-message="minlength"> Password must include minimum 6 characters.</div>
+        </div>
     </div>
     <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-4">
         <label>Confirm Password</label>
@@ -59,7 +61,7 @@
         <small class="help-block text-danger" 
             ng-show="su.newUser.passwordConfirmation !== su.newUser.password">
           Passwords doesn't match
-      </small> <br>
+        </small> <br>
     </div>
     <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12">
         <button ng-disabled="su.newUser.passwordConfirmation !== su.newUser.password" class="btn btn-info col-12" type="button" 

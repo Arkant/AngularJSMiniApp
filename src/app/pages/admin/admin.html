@@ -5,40 +5,9 @@
     <h1 class="display-4 text-center">Admin Page</h1>
   </div>
   <div class="table-wrapper-scroll-y my-custom-scrollbar">
-    <table class="table table-striped rounded table-hover">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>E-mail</th>
-          <th>Admin</th>
-          <th>Password </th>
-          <th>History </th>
-          <th>Profile</th>              
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr ng-repeat="(key, value) in admCont.listOfUsers">
-          <td ng-short>{{ key }}</td>
-          <td>{{ value.firstName }}</td>
-          <td>{{ value.email }}</td>
-
-          <td>
-             <input type="checkbox" ng-checked ="value.role === 'admin'" ng-click='admCont.changeUserRole(key)'>
-          </td>
-
-          <td>
-            <button class="btn btn-outline-secondary" type="button" ng-click='admCont.resetPsw(item.id)'>Reset password</button>
-          </td>
-
-          <td><i class="fas fa-history tabble__icon" data-toggle="modal" ng-click="admCont.setSelectedUser(key)" data-target="#userHistoryModal"></i></td>
-        
-          <td><i class="fas fa-user-circle tabble__icon" ui-sref="profile"></i></td>
-
-        </tr>
-      </tbody>
-    </table>
+    <custom-table headers='admCont.headers' data='admCont.listOfUsers' sort='admCont.sort' admin-table='admCont.adm'
+      change-user-role='admCont.changeUserRole(data)' reset-psw="admCont.resetPsw(data)"
+      set-selected-user="admCont.setSelectedUser(data)"></custom-table>
   </div>
 </div>
 

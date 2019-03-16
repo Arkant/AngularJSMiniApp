@@ -1,21 +1,22 @@
 'use strict';
 
 export default class AdminController {
-    constructor($scope, $rootScope, $filter, syncDataService, sharedAdminFactory) {
+    constructor($rootScope, syncDataService, adminService, sharedAdminFactory) {
         'ngInject';
-        this.scope = $scope;
-        this.filter = $filter;
         this.rootScope = $rootScope;
         this.syncDataService = syncDataService;
-        this.syncDataService.getAllUsersFromFirebase();
+        this.adminService = adminService;
+        syncDataService.getAllUsersFromFirebase();
 
         this.listOfUsers = this.rootScope.listOfUsers;
-
-        this.scope.filteredItems = [];
-        this.scope.sort = {       
+        this.filteredItems = [];      
+        this.headers =  ['Id','Name','E-mail','Admin','Password','History',' Profile'];
+        this.sort = {       
             sortingOrder : 'id',
             reverse : false
         }
+        this.adm = true;
+        this.listOfUsers = this.syncDataService.getDealsFromFirebase();
 
         this.sharedAdminFactory = sharedAdminFactory;
     }
@@ -31,7 +32,7 @@ export default class AdminController {
     changeUserRole(id){
         let userRole = this.rootScope.listOfUsers[id].role;
         userRole = userRole === 'admin' ? 'user': 'admin';
-        this.syncDataService.changeUserRole(id, userRole);
+        this.adminService.changeUserRole(id, userRole);
     }
 
 }

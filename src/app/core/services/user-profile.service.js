@@ -1,45 +1,42 @@
-/* eslint-disable no-console */
 'use strict';
 
 export default function (app) {
   app
-    .service('userProfileService', function (usersMocksService, syncDataService, $rootScope) {
+    .service('userProfileService', function (usersMocksService, syncDataService, $rootScope, $log) {
       'ngInject';
 
       class User {
-        constructor(user) {
+        constructor(user, uid) {
+          this.userId = uid;
           this.firstName = user.firstName || '';
           this.lastName = user.lastName || '';
           this.phone = user.phone || '';
           this.email = user.email;
           this.role = usersMocksService.userRole;
-          this.ava = null;
+          this.ava = '';
         }
       }
 
       this.createNewUser = (user, uid) => {
-        $rootScope.currentUser = new User(user);
+        $rootScope.currentUser = new User(user, uid);
         $rootScope.currentUserId = uid;
       };
 
       this.createFormInfo = function () {
-        return {
-          firstName: $rootScope.currentUser.firstName,
-          lastName: $rootScope.currentUser.lastName,
-          role: $rootScope.currentUser.role,
-          phone: $rootScope.currentUser.phone,
-          email: $rootScope.currentUser.email,
-          ava: $rootScope.currentUser.ava
-        }
+        const { firstName, lastName, role, phone, email, ava } = $rootScope.currentUser;
+        return { firstName, lastName, role, phone, email, ava };
       };
 
       this.saveToCurrentUser = function (data) {
-        $rootScope.currentUser.firstName = data.firstName || '',
-        $rootScope.currentUser.lastName =  data.lastName || '',
-        $rootScope.currentUser.role = data.role || usersMocksService.userRole,
-        $rootScope.currentUser.phone = data.phone || '',
-        $rootScope.currentUser.email = data.email || ''
-        $rootScope.currentUser.ava = data.ava || ''
+        const { 
+          firstName = '', 
+          lastName = '', 
+          role = usersMocksService.userRole, 
+          phone = '', 
+          email = '', 
+          ava = '' } = data;
+
+        $rootScope.currentUser = { firstName, lastName, role, phone, email, ava };
       };
 
       this.setProfileImage = file => {
@@ -49,10 +46,9 @@ export default function (app) {
           })
           .then(function(link) {
             $rootScope.currentUser.ava = link;
-            console.log($rootScope.currentUser)
           })
           .catch(function(error) {
-            console.log('error:', error)
+            $log.log(error);
           })
       };
     })

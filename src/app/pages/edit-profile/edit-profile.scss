@@ -17,7 +17,7 @@
           .editItem {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
+            margin-bottom: 6px;
             p, h3 {
               padding: 0;
               margin-bottom: 0;
@@ -32,25 +32,17 @@
           .title {
             margin-bottom: 35px;
           }
-          .alert-danger {
-            border: none;
-            border-radius: 0px;
-            padding: 4px 15px;
-            margin-bottom: 6px;
-            text-align: center;
-            background-color: #f8d7da3b;
+          .danger {
+            color: #dc3545;
+            font-size: 80%;
+            font-weight: 400;
+            margin-bottom: 15px;
+            text-align: right;
           }
         }
         .saveChanges {
             margin: 0;
             padding: 0;
-          .alert-success {
-            padding: 5px;
-            text-align: center;
-            h5 {
-              margin: 0;
-            }
-          }
          }
         }
 
@@ -78,7 +70,7 @@
           }
           .changeAva:hover {
             color: white;
-            background-color: #17a2b8;;
+            background-color: #17a2b8;
           }
         }
       }

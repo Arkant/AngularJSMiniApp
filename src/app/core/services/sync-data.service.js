@@ -2,18 +2,10 @@
 'use strict';
 
 import firebase from 'firebase';
-import 'angularfire';
-
-
-// ==== connecting to firebase ====
-// import configFirebase from '~/env.js'
-// firebase.initializeApp(configFirebase);
-// ================================
-
 
 export default function (app) {
   app
-    .service('syncDataService', function ($firebaseArray, $firebaseObject, $firebaseStorage, usersMocksService, $rootScope) {
+    .service('syncDataService', function ($firebaseArray, $firebaseObject, $rootScope) {
       'ngInject';
       
       this.getDealsFromFirebase = () => {
@@ -40,6 +32,7 @@ export default function (app) {
         return ref.child('listOfUsers')
         .child(uid)
         .update({
+          userId: uid,
           firstName: $rootScope.currentUser.firstName,
           lastName: $rootScope.currentUser.lastName,
           phone: $rootScope.currentUser.phone,
@@ -61,11 +54,15 @@ export default function (app) {
       }
 
       this.getAllUsersFromFirebase = () => {
+        $rootScope.listOfUsers = {};
         const ref = firebase.database().ref();
         $rootScope.listOfUsers = $firebaseObject(ref.child('listOfUsers'));
-        $rootScope.listOfUsers.$loaded()
-          .then(console.log($rootScope.listOfUsers));
+        return $rootScope.listOfUsers.$loaded()
+          .then(() => {
+            console.log($rootScope.listOfUsers)
+          });
       }
+
 
       this.getCheckedUserDealsFromFirebase = userID => {
         const ref = firebase.database().ref();
@@ -84,18 +81,6 @@ export default function (app) {
           .child('currency-converter/profile-pictures')
           .child($rootScope.currentUserId);
         return ref.put(file)
-      }
-
-      this.changeUserRole = (uid, role) => {
-        console.log(role);
-        $rootScope.listOfUsers[uid].role = role;
-
-        const ref = firebase.database().ref()
-          .child('listOfUsers')
-          .child(uid);
-        return ref.update({
-          [role]: role
-        })
       }
     })
 }

@@ -7,30 +7,7 @@
     <article class="col-9">
       <h1 class="display-4 text-center">Successful transactions</h1>
       <div class="table-wrapper-scroll-y my-custom-scrollbar">
-        <table class="border table table-striped rounded table-hover">
-          <thead>
-            <tr class="table-row">
-              <th custom-sort order="'date'" sort="homeCtrl.sort">Date</th>
-              <th custom-sort order="'currencyFrom'" sort="homeCtrl.sort">Currency From</th>
-              <th custom-sort order="'currencyTo'" sort="homeCtrl.sort">Currency To</th>
-              <th custom-sort order="'commission'" sort="homeCtrl.sort">Commission</th>
-              <th custom-sort order="'rate'" sort="homeCtrl.sort">Rate</th>
-              <th custom-sort order="'amountFrom'" sort="homeCtrl.sort">Amount From</th>
-              <th custom-sort order="'amountTo'" sort="homeCtrl.sort">Amount To</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="table-row" ng-repeat="el in homeCtrl.currentUserDeals | orderBy:homeCtrl.sort.sortingOrder:homeCtrl.sort.reverse">
-              <td>{{el.date.toLocaleDateString()}}</td>
-              <td>{{el.currencyFrom}}</td>
-              <td>{{el.currencyTo}}</td>
-              <td>{{el.commission}}</td>
-              <td>{{el.rate}}</td>
-              <td>{{el.amountFrom}}</td>
-              <td>{{el.amountTo}}</td>
-            </tr>
-          </tbody>
-        </table>
+        <custom-table headers = 'headers' data = 'currentUserDeals' sort = 'sort'></custom-table>
       </div>
     </article>
   </div>

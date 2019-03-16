@@ -58,3 +58,7 @@ body {
     padding: 10px;
     vertical-align: middle;
 }
+
+.ng-invalid.ng-touched {
+    border: 1.5px solid #dc35464f;
+}
