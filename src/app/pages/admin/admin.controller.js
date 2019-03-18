@@ -25,8 +25,8 @@ export default class AdminController {
         this.sharedAdminFactory.setUserData(id);
     }
 
-    resetPsw(id) {
-        this.rootScope.listOfUsers[id].password = this.rootScope.listOfUsers[id].login;
+    resetPsw() {
+        // this.rootScope.listOfUsers[id].password = this.rootScope.listOfUsers[id].login;
     }
     
     changeUserRole(id){

@@ -6,8 +6,7 @@ function AdminModalController(sharedAdminFactory, $scope, syncDataService, workW
     const self = this;
     
     $scope.$watch(() => sharedAdminFactory.userData, () => {
-        // const userID = sharedAdminFactory.getUserData();
-        const userID = '7sikAxSigSZGC6v6FezOSeaNEPw2';
+        const userID = sharedAdminFactory.getUserData();
         self.data = syncDataService.getCheckedUserDealsFromFirebase(userID);
         self.data.$loaded(() => {
             workWithDate.transformData(self.data)
