@@ -5,7 +5,7 @@ export default function (app) {
     .service('workWithDate', function () {
       'ngInject';
 
-      this.transformData = listOfData => {
+      this.formatDate = listOfData => {
         listOfData.forEach(e => {
             e.date = new Date(e.date)
         })

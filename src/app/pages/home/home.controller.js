@@ -18,7 +18,7 @@ export default class HomeController {
   init() {
     this.currentUserDeals = this.syncDataService.getDealsFromFirebase();
     this.currentUserDeals.$loaded(() => {
-      this.workWithDate.transformData(this.currentUserDeals);
+      this.workWithDate.formatDate(this.currentUserDeals);
     });
   }
 }
