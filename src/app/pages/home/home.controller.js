@@ -1,10 +1,9 @@
 'use strict';
 
 export default class HomeController {
-  constructor(workWithDate, syncDataService, $state, $scope) {
+  constructor(workWithDate, syncDataService, $scope) {
     'ngInject';
 
-    this.state = $state;
     this.syncDataService = syncDataService;
     this.workWithDate = workWithDate;
     $scope.headers = ['Amount From', 'Amount To', 'Commission', 'Currency From', 'Currency To', 'Date', 'Rate'];
@@ -18,8 +17,6 @@ export default class HomeController {
 
   init() {
     this.currentUserDeals = this.syncDataService.getDealsFromFirebase();
-// eslint-disable-next-line no-console
-console.log(this.currentUserDeals);
     this.currentUserDeals.$loaded(() => {
       this.workWithDate.transformData(this.currentUserDeals);
     });
