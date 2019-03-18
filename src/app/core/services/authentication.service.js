@@ -8,7 +8,6 @@ export default function (app) {
       'ngInject';
 
       this.signUpToFirebase = user => {
-        console.log(user)
         const { email, password } = user;
 
         $rootScope.auth = $firebaseAuth(firebase.auth());
