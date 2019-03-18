@@ -17,6 +17,12 @@ import "popper.js";
 
 import "bootstrap";
 
+import 'angularjs-geolocation';
+
+import 'ng-autocomplete';
+
+import 'ng-storage';
+
 import "angular-toastr";
 import "./index.firebase.config";
 

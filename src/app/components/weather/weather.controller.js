@@ -1,18 +1,60 @@
 'use strict';
 
-function WeatherController(weatherAPIService) {
-    'ngInject';
+export default class WeatherController {
+    constructor(weatherAPIService, geolocationService, localStorageService) {
+        'ngInject';
+        
+        this.weatherAPIService = weatherAPIService;
+        this.geolocationService = geolocationService;
+        this.localStorageService = localStorageService;
 
-    this.weatherData = {};
+        this.weatherData = {};
+        this.selectedLocation = null;
+        this.tableShow = false;
+    }
 
-    weatherAPIService.getData().then(data => {
-        this.weatherData.temp = data.temp;
-        this.weatherData.feelLike = data.app_temp;
-        this.weatherData.wind = data.wind_spd;
-        this.weatherData.dir = data.wind_cdir_full;
-        this.weatherData.city = data.city_name;
-        this.weatherData.country = data.country_code;
-    });
+    getForecastForSavedLocation() {
+      const coords = this.localStorageService.getCoordinates();
+      
+      if (coords) {
+        this.weatherAPIService.getForecast(coords)
+        .then(data => {
+          this.localStorageService.setCoordinates(coords);
+          this.weatherData = data;
+          this.tableShow = true;
+        });
+      }
+    }
+
+    getForecastForSelected() {
+      const location = this.autocomplete.details.geometry.location;
+
+      const coords = {
+        lat: location.lat(),
+        long: location.lng()
+      }
+      
+      this.weatherAPIService.getForecast(coords)
+        .then(data => {
+          this.localStorageService.setCoordinates(coords);
+          this.weatherData = data;
+          this.tableShow = true;
+        });
+    }
+
+    getForecastForLocal() {
+      this.geolocationService.getCoordinates().then(coords => {
+        this.weatherAPIService.getForecast(coords)
+        .then(data => {
+          this.localStorageService.setCoordinates(coords);
+          this.selectedLocation = `${data.city}, ${data.country}`;
+          this.weatherData = data;
+          this.tableShow = true;
+        });
+      });
+    }
+
+    $onInit() {
+        this.getForecastForSavedLocation();
+    }
 }
-
-export default WeatherController;

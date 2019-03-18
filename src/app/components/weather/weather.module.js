@@ -9,5 +9,3 @@ weatherModule
     .component('weatherComponent', new WeatherComponent());
 
 export default weatherModule;
-
- 

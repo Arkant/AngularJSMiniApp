@@ -19,6 +19,9 @@ const App = angular.module(
   "angularApp", [
     // plugins
     uiRouter,
+    "geolocation",
+    "ngStorage",
+    "ngAutocomplete",
     "ngMessages", 
     "oc.lazyLoad",
     "firebase",
