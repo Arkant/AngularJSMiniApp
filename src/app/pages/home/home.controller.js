@@ -18,7 +18,8 @@ export default class HomeController {
 
   init() {
     this.currentUserDeals = this.syncDataService.getDealsFromFirebase();
-
+// eslint-disable-next-line no-console
+console.log(this.currentUserDeals);
     this.currentUserDeals.$loaded(() => {
       this.workWithDate.transformData(this.currentUserDeals);
     });
