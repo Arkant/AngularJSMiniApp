@@ -3,6 +3,6 @@ import * as firebase from 'firebase';
 import 'angularfire';
 
 // ========= init firebase ========
-import configFirebase from '../../env'
+import configFirebase from '../../config'
 firebase.initializeApp(configFirebase)
 // ================================

@@ -1,21 +1,8 @@
 'use strict';
 
-import AdminComponent from './admin.component';
+import AdminController from './admin.controller';
 
-const adminPageModule = angular.module('admin-module', [
-    'ui.router'
-])
-    .config(($stateProvider, $urlRouterProvider) => {
-        'ngInject';
-        $urlRouterProvider.otherwise('/');
-
-        $stateProvider
-        .state({
-            name: 'admin',
-            url: '/admin',
-            component: 'admin'
-        })
-    })
-    .component('admin', new AdminComponent());
+const adminPageModule = angular.module('admin-module', [])
+adminPageModule.controller('AdminController', AdminController)
 
 export default adminPageModule;

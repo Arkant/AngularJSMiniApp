@@ -8,15 +8,14 @@ export default function (app) {
       'ngInject';
 
       this.signUpToFirebase = user => {
-        const { email, password } = user;
-
+        
         $rootScope.auth = $firebaseAuth(firebase.auth());
 
-        return $rootScope.auth.$createUserWithEmailAndPassword(email, password)
+        return $rootScope.auth.$createUserWithEmailAndPassword(user.email, user.password)
           .then(function(firebaseUser) {
             userProfileService.createNewUser(user, firebaseUser.user.uid);
 
-            return syncDataService.saveUserInfoToFirebase(firebaseUser.user.uid);
+            return syncDataService.saveCurrentUserToFirebase();
           })
           .then(function() {
             $location.path('/home')
@@ -40,7 +39,7 @@ export default function (app) {
         return $rootScope.auth.$signInWithEmailAndPassword(email, password)
           .then(function(data) {
             $rootScope.currentUserId = data.user.uid;
-            return syncDataService.getUserInfoFromFirebase(data.user.uid);
+            return syncDataService.getUserFromFirebase(data.user.uid);
           })
           .then(function(user) {
             $rootScope.currentUser = user;
@@ -55,6 +54,7 @@ export default function (app) {
       this.signOutFromFirebase = () => {
         $rootScope.auth.$signOut()
           .then(function() {
+            $rootScope.auth = null;
             $rootScope.currentUser = null;
             $rootScope.currentUserId = null;
             $rootScope.currentUserDeals = null;

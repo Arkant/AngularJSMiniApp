@@ -21,7 +21,7 @@ export default class EditProfileController {
       this.userProfileService.setProfileImage(this.scope.file);
     }
 
-    this.syncDataService.saveUserInfoToFirebase(this.currentUserId)
+    this.syncDataService.saveCurrentUserToFirebase()
       .then(() => {
         this.toastr.success("Successfully saved.");
         this.$state.go('profile');

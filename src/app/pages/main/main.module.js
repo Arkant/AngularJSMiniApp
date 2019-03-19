@@ -13,7 +13,10 @@ const mainPageModule = angular.module('main-module', [
         $stateProvider
             .state('main', {
                 url: '/',
-                component: 'main'
+                component: 'main',
+                data: {
+                    role: []
+                }
             });
     })
     .component('main', new MainComponent());
