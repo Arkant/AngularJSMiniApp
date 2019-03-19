@@ -1,14 +1,16 @@
 'use strict';
 
-function AdminModalController(sharedAdminFactory, $scope, syncDataService) {
+function AdminModalController(sharedAdminFactory, $scope, syncDataService, workWithDate) {
     'ngInject';
 
     const self = this;
     
     $scope.$watch(() => sharedAdminFactory.userData, () => {
-        // const userID = sharedAdminFactory.getUserData();
-        const userID = '3vesXZTo6tYLgevTBY3aLdZ26TB2';
+        const userID = sharedAdminFactory.getUserData();
         self.data = syncDataService.getCheckedUserDealsFromFirebase(userID);
+        self.data.$loaded(() => {
+            workWithDate.transformData(self.data)
+          });
     });
 }
 

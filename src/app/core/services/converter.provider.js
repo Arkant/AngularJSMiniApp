@@ -30,7 +30,7 @@ export default function (app) {
           },
 
           getUserDeals: value => {
-            const time = new Date();
+            const time =  new Date().toGMTString();
             const {
               currencyGiveName, 
               currencyReceiveName, 
@@ -41,7 +41,7 @@ export default function (app) {
             } = value;
 
             return {
-              date: `${time.getDate()}.${time.getMonth() + 1}.${time.getFullYear()}`,
+              date: time,
   
               currencyFrom: currencyGiveName,
               currencyTo: currencyReceiveName,

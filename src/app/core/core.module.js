@@ -23,6 +23,7 @@ import adminService from './services/admin.service';
 import authenticationService from './services/authentication.service';
 import userProfileService from './services/user-profile.service';
 import weatherAPIService from './services/weatherAPI.service';
+import workWithDate from './services/workWithDate.service';
 import geolocationService from './services/geolocation.service';
 import localStorageService from './services/localStorage.service';
 
@@ -47,6 +48,8 @@ adminService(shared);
 authenticationService(shared);
 userProfileService(shared);
 weatherAPIService(shared);
+workWithDate(shared);
+
 geolocationService(shared);
 localStorageService(shared);
 

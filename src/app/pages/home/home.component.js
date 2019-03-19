@@ -7,5 +7,6 @@ export default class HomeComponent {
     constructor() {
         this.controller = HomeController;
         this.templateUrl = homeTpl;
+        this.controllerAs = 'homeCtrl';
     }
 }
