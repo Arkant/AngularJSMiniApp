@@ -9,15 +9,6 @@ const mainPageModule = angular.module('main-module', [
         'ngInject';
 
         $urlRouterProvider.otherwise('/');
-<<<<<<< Updated upstream
-
-        $stateProvider
-            .state('main', {
-                url: '/',
-                component: 'main'
-            });
-=======
->>>>>>> Stashed changes
     })
     .component('main', new MainComponent());
 
