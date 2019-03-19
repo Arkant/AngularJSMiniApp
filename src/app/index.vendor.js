@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 
 // node_modules
@@ -16,7 +17,15 @@ import "popper.js";
 
 import "bootstrap";
 
+import 'angularjs-geolocation';
 
+import 'ng-autocomplete';
 
-// local scripts
-//import "../assets/js/...";
+import 'ng-storage';
+
+import "angular-toastr";
+import "./index.firebase.config";
+
+import "../../node_modules/angular-toastr/dist/angular-toastr.min.css";
+
+import "../assets/images/noImage.png";

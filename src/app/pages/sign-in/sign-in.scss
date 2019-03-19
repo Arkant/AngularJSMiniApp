@@ -8,3 +8,18 @@
 .col-6 {
   height: 349px;
 }
+.toast-error {
+  background-color: #C4392A;
+}
+
+.toast {
+  .toast-message {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+.toast-top-right {
+  background-color: #C4392A;
+  top: 100px;
+}

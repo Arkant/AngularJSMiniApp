@@ -41,46 +41,68 @@
     label {
         margin-bottom: 10px;
     }
-    
-    .btn {
-        width: 10%;
+}
+  
+  
+.form-group {
+  width: 40%;
+  margin-bottom: 0;
+}
+
+.input-group>.custom-select {
+  width: 20%;
+  flex: 0 auto;
+}
+
+.input-group {
+  display: flex;
+  align-items: flex-start;
+}
+
+.wrapper {
+  padding: 80px 0;
+}
+
+.input-group-text {
+  font-size: 20px;
+}
+
+.h2 {
+  text-align: center;
+  margin: 15px 0 ;
+}
+
+.custom-select {
+  font-size: 19px;
+}
+
+.btn {
+  &:hover {
+    color: #fff;
+  }
+} 
+
+.select {
+  width: 82%;
+  margin-bottom: 10px;
+  height: 38px;
+  padding: 5px;
+  font-size: 16px
+}
+
+#toast-container{ 
+  top:100px;
+  .toast-error {
+    background-color: #C4392A;
+  }
+  .toast-success {
+    background-color: green;
+  }
+  .toast {
+    .toast-message {
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
     }
   }
-  
-  .form-group {
-    width: 40%;
-    margin-bottom: 0;
-  }
-  
-  .input-group>.custom-select {
-    width: 20%;
-    flex: 0 auto;
-  }
-  
-  .input-group {
-    display: flex;
-    align-items: flex-start;
-  }
-  
-  .wrapper {
-    padding: 80px 0;
-  }
-  
-  .input-group-text {
-    font-size: 20px;
-  }
-  
-  .h2 {
-    text-align: center;
-    margin: 15px 0 ;
-  }
-  
-  .custom-select {
-    font-size: 19px;
-  }
-  
-  .btn {
-    &:hover {
-      color: #fff;
-    }
-  } 
+}

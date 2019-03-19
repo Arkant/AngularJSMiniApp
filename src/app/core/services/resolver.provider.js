@@ -8,6 +8,10 @@ export default function (app) {
         this.editProfilePagePrealoading = editProfilePagePrealoading;
         this.transactionsListPagePreloading = transactionsListPagePreloading;
         this.signInPagePreloading = signInPagePreloading;
+        this.signUpPagePreloading = signUpPagePreloading;
+        this.adminPagePreloading = adminPagePreloading;
+        this.converterPagePreloading = converterPagePreloading;
+        this.homePagePreloading = homePagePreloading;
         this.$get = function() { return this; };
     }
 
@@ -63,6 +67,62 @@ export default function (app) {
                 name: signInModule.default.name,
             });
             deferred.resolve(signInModule.default.controller);
+        });
+        return deferred.promise;
+    }
+
+    function signUpPagePreloading ($q, $ocLazyLoad) {
+        "ngInject";
+
+        const deferred = $q.defer();
+        require.ensure([], require => {
+            const signUpModule = require('../../pages/sign-up/sign-up.module');
+            $ocLazyLoad.load({
+                name: signUpModule.default.name,
+            });
+            deferred.resolve(signUpModule.default.controller);
+        });
+        return deferred.promise;
+    }
+
+    function adminPagePreloading ($q, $ocLazyLoad) {
+        "ngInject";
+
+        const deferred = $q.defer();
+        require.ensure([], require => {
+            const adminModule = require('../../pages/admin/admin.module');
+            $ocLazyLoad.load({
+                name: adminModule.default.name,
+            });
+            deferred.resolve(adminModule.default.controller);
+        });
+        return deferred.promise;
+    }
+
+    function converterPagePreloading ($q, $ocLazyLoad) {
+        "ngInject";
+
+        const deferred = $q.defer();
+        require.ensure([], require => {
+            const converterModule = require('../../pages/currency-converter/converter.module');
+            $ocLazyLoad.load({
+                name: converterModule.default.name,
+            });
+            deferred.resolve(converterModule.default.controller);
+        });
+        return deferred.promise;
+    }
+
+    function homePagePreloading ($q, $ocLazyLoad) {
+        "ngInject";
+
+        const deferred = $q.defer();
+        require.ensure([], require => {
+            const homeModule = require('../../pages/home/home.module');
+            $ocLazyLoad.load({
+                name: homeModule.default.name,
+            });
+            deferred.resolve(homeModule.default.controller);
         });
         return deferred.promise;
     }

@@ -1,11 +1,12 @@
 'use strict';
 
-export default class currencyController {
-    constructor($scope, $rootScope, CurrencyService, converterConstants, syncDataService) {
+export default class ConverterController {
+    constructor($scope, $rootScope, CurrencyService, converterConstants, syncDataService, toastr) {
         'ngInject';
         this.CurrencyService = CurrencyService;
         this.rootScope = $rootScope;
         this.syncDataService = syncDataService;
+        this.toastr = toastr;
 
         this.currency = CurrencyService.getResponse();
         this.currencyObj = CurrencyService.getList();
@@ -46,7 +47,6 @@ export default class currencyController {
 
     swapCurrency () {
         [this.currencyGiveName, this.currencyReceiveName] = [this.currencyReceiveName, this.currencyGiveName];
-        [this.tradeValue, this.receiveValue] = [this.receiveValue, this.tradeValue];
     }
 
     withCommissions () {
@@ -64,10 +64,13 @@ export default class currencyController {
             commission: this.commission,
             rate: this.rate
         };
-        const userDeals = this.CurrencyService.getUserDeals(objValue);
+        const userDeal = this.CurrencyService.getUserDeals(objValue);
 
-        this.syncDataService.addDealToFirebase(userDeals);
+        this.syncDataService.addDealToFirebase(userDeal);
         this.syncDataService.getAllFromFirebase(); // it's just for check. It show all deals in console
+        this.tradeValue !== null ? this.toastr.success('Congrats! Successful deal!') : this.toastr.error('Ooops! How much trade?'); 
+        this.receiveValue = null;
+        this.tradeValue = null;
    }
 
 }

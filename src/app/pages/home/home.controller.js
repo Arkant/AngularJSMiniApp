@@ -1,15 +1,19 @@
 'use strict';
 
-function MainController($scope, $filter, $rootScope, syncDataService) {
+function MainController($scope, $filter, $rootScope, syncDataService,$state) {
   'ngInject';
 
-  $scope.currentUserDeals = syncDataService.getDealsFromFirebase();
+  if (!$rootScope.currentUserId) {
+    $state.go('sign-up');
+  } else {
+    $scope.currentUserDeals = syncDataService.getDealsFromFirebase();
+  }
 
   $scope.sort = {
     sortingOrder: 'date',
     reverse: false
-  };
-
+  }; 
+  $scope.headers = ['Amount From', 'Amount To', 'Commission', 'Currency From', 'Currency To', 'Date', 'Rate'];
   $scope.filteredItems = [];
 
   let searchMatch = function (haystack, needle) {

@@ -1,11 +1,20 @@
 'use strict';
 
-export default class SignUpController {
-  constructor(authenticationService) {
+class SignUpController {
+  constructor(authenticationService, toastr) {
     'ngInject';
-
-    this.addUser = () => {
-      authenticationService.signUpToFirebase(this.newUser.login, this.newUser.password);
-    }
+    this.authenticationService = authenticationService;
+    this.toastr = toastr;
   }  
+
+  addUser () {
+    this.authenticationService.signUpToFirebase(this.newUser)
+    .then(response => {
+      if (response) {
+        this.toastr.error(response.message);
+      }
+    });
+  }
 }
+
+export default SignUpController;

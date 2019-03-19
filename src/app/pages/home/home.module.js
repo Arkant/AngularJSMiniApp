@@ -1,25 +1,9 @@
 'use strict';
 
-import HomeComponent from './home.component';
 import HomeController from './home.controller';
 import './home.scss';
-import homeTpl from './home.html';
 
-const homePageModule = angular.module('home-module', [
-  'ui.router'
-])
-  .config(($stateProvider, $urlRouterProvider) => {
-    'ngInject';
-
-    $urlRouterProvider.otherwise('/');
-
-    $stateProvider
-      .state('home', {
-        url: '/home',
-        controller: HomeController,
-        templateUrl: homeTpl
-      });
-  })
-  .component('home', new HomeComponent());
+const homePageModule = angular.module('home-module', [])
+homePageModule.controller('HomeController', HomeController);
 
 export default homePageModule;

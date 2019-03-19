@@ -56,13 +56,13 @@
                 <div class="input-group-prepend">
                     <label class="input-group-text" for="inputGroupSelect01">Commission</label>
                 </div>
-                <select class="custom-select" ng-model='cc.commission'>
+                <select class='select' ng-model='cc.commission'>
                     <option ng-repeat='value in cc.constantsFee'>{{ value }}</option>
                 </select>
             </div>
 
-            <div class="button">
-                <button class="btn btn-danger" ng-click='cc.send()'>Buy</button>
+            <div class="button col text-center">
+                <button class="btn btn-dark button col-xs-4 col-md-4 col-lg-4" ng-click='cc.send()'>Buy</button>
             </div>
 
         </form>

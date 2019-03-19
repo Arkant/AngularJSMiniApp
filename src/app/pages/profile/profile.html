@@ -3,14 +3,19 @@
     <div class="profileCard col-xs-10 col-sm-10 col-md-8 col-lg-5">
         <div class="content col-xs-7 col-sm-7 col-md-7 col-lg-7">
             <h3>
-                {{currentUser.firstName}} {{currentUser.lastName}}
+                {{currentUser.firstName || 'User Name'}} {{currentUser.lastName}}
             </h3>
-            <strong class="d-inline-block text-primary">{{currentUser.role | uppercase}}</strong>
+            <strong class="d-inline-block text-primary">{{currentUser.role || 'USER' | uppercase}}</strong>
             <p><span class>phone: </span><span>{{currentUser.phone}}</span></p>
-            <p class='email'><span>email: </span><span>{{currentUser.email}}</span></p>
+            <p class='email'>
+                <span>email: </span><span>{{currentUser.email}}</span>
+            </p>
             <button class="btn btn-info" type="button" ui-sref="editProfile">Edit profile</button>
         </div>
-        <img class="col-xs-5 col-sm-5 col-md-5 col-lg-5 ava" ng-src="{{currentUser.ava}}" alt="AVA"
+        <img 
+            class="col-xs-5 col-sm-5 col-md-5 col-lg-5 ava" 
+            alt="avatar" 
+            ng-src="{{currentUser.ava || '../assets/images/noImage_b5c13ab258ec44db86a543446de93713.png'}}"
             data-holder-rendered="true">
     </div>
 

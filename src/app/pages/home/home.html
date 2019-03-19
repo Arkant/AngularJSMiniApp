@@ -1,30 +1,14 @@
-<section class="container">
-  <preloader show="currentUserDeals === undefined || !currentUserDeals.length"></preloader>
-  <h1 class="display-4 text-center">Successful transactions</h1>
-  <div class="table-wrapper-scroll-y my-custom-scrollbar">
-    <table class="border table table-striped rounded table-hover">
-      <thead>
-        <tr class="table-row">
-          <th custom-sort order="'date'" sort="sort">Date</th>
-          <th custom-sort order="'currencyFrom'" sort="sort">Currency From</th>
-          <th custom-sort order="'currencyTo'" sort="sort">Currency To</th>
-          <th custom-sort order="'commission'" sort="sort">Commission</th>
-          <th custom-sort order="'rate'" sort="sort">Rate</th>
-          <th custom-sort order="'amountFrom'" sort="sort">Amount From</th>
-          <th custom-sort order="'amountTo'" sort="sort">Amount To</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-row" ng-repeat="el in currentUserDeals | orderBy:sort.sortingOrder:sort.reverse">
-          <td>{{el.date}}</td>
-          <td>{{el.currencyFrom}}</td>
-          <td>{{el.currencyTo}}</td>
-          <td>{{el.commission}}</td>
-          <td>{{el.rate}}</td>
-          <td>{{el.amountFrom}}</td>
-          <td>{{el.amountTo}}</td>
-        </tr>
-      </tbody>
-    </table>
+<section class="container-fluid">
+  <preloader show="currentUserDeals === undefined || !currentUserDeals.$resolved"></preloader>
+  <div class="row">
+    <article class="col-3 sidebar">
+        <weather-component></weather-component>
+    </article>
+    <article class="col-9">
+      <h1 class="display-4 text-center">Successful transactions</h1>
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+        <custom-table headers = 'headers' data = 'currentUserDeals' sort = 'sort'></custom-table>
+      </div>
+    </article>
   </div>
 </section>

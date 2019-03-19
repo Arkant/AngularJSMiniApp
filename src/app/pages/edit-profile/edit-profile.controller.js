@@ -1,39 +1,44 @@
 'use strict';
-
-function EditProfileController($log, $scope, $rootScope, userProfileService, syncDataService, $state) {
-  'ngInject';
-  $scope.success = false;
-  $scope.formInfo = userProfileService.createFormInfo($rootScope);
-  syncDataService.getAllUsersFromFirebase();
-  
-  $scope.submitForm =  function(data){
-    if ($scope.profile.$valid) {
-      $rootScope.currentUser = data;
-      syncDataService.saveUserInfoToFirebase($rootScope.currentUserId);
-      $scope.success = true;
-      setTimeout(function(){
-        $state.go('profile');
-        syncDataService.getAllUsersFromFirebase();
-      }, 1500);
-    }
+export default class EditProfileController {
+  constructor($log, $scope, $rootScope, userProfileService, syncDataService, $state, toastr) {
+    'ngInject'
+    this.$log = $log;
+    this.scope = $scope;
+    this.toastr = toastr;
+    this.currentUserId = $rootScope.currentUserId;
+    this.userProfileService = userProfileService;
+    this.syncDataService = syncDataService;
+    this.$state = $state;
+    this.profile = null;
+    this.formInfo = userProfileService.createFormInfo();
+    this.scope.$watch('file', this.onChanged.bind(this));
   }
 
-  $scope.onFileChanged = function(event) {
-    const file = event.target.files[0];
+  submitForm(data) {
+    this.userProfileService.saveToCurrentUser(data);
 
-    if (!file) {
+    if (this.scope.file) {
+      this.userProfileService.setProfileImage(this.scope.file);
+    }
+
+    this.syncDataService.saveCurrentUserToFirebase()
+      .then(() => {
+        this.toastr.success("Successfully saved.");
+        this.$state.go('profile');
+      })
+  }
+
+  onChanged() {
+    if (!this.scope.file) {
       return;
     }
-    // eslint-disable-next-line no-console
-    console.log(file);
 
-    // в процессе реализации
-    // 1) загрузить файл в файрбейс, типа так $http('my-backend.com/file-upload', file);
-    // 2) получить его src
-    // 3) присвоить src в formInfo.ava
+    const reader = new FileReader();
+    reader.readAsDataURL(this.scope.file);
+    reader.onload = () => {
+      this.scope.$applyAsync(() => {
+        this.formInfo.ava = reader.result;
+      });
+    }
   }
-
-  $log.debug('Hello from EDIT-PROFILE controller!');
 }
-
-export default EditProfileController;

@@ -6,6 +6,7 @@ var autoprefixer = require('autoprefixer');
 var Manifest = require('manifest-revision-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var config = require("../../config.js");
 
 var rootPublic = path.resolve('./src');
 var NODE_ENV = process.env.NODE_ENV || "production";
@@ -174,7 +175,8 @@ module.exports = function (_path) {
       }),
       new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: path.join(_path, 'src', 'tpl-index.ejs')
+        template: path.join(_path, 'src', 'tpl-index.ejs'),
+        placesApiKey: config.GOOGLE_PLACES_API_KEY
       })
     ]
   };

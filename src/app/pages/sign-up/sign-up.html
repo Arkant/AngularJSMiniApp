@@ -1,35 +1,71 @@
-<div class="sign-up-form__wrapper d-flex justify-content-center col-12 pt-5">
-    <form action="" class="sign-up-form col-xs-12 col-sm-6 col-md-4 col-lg-3 border rounded pt-4 pb-4">
-          <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-3">
-              <label>Login (e-mail)</label>
-              <input type="text" 
-                  class="col-xs-12 col-md-12 col-lg-12" 
-                  placeholder="JohnDaw@mail.box"
-                  ng-model="su.newUser.login" 
-                  />
-          </div>
-
-          <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-3">
-              <label>Password</label>
-              <input type="password" 
-                  class="col-xs-12 col-md-12 col-lg-12" 
-                  placeholder="password"
-                  ng-model="su.newUser.password" 
-                  />
-          </div>
-
-          <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-4">
-              <label>Password (confirm)</label>
-              <input type="password" 
-                  class="col-xs-12 col-md-12 col-lg-12" 
-                  placeholder="password"
-                  ng-model="su.newUser.passwordConfirmation" 
-                  />
-          </div>
-
-          <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12">
-              <button class="btn btn-info col-12" type="button" 
-              ng-click="su.addUser()">Sign Up</button>
-          </div>
-    </form>
+<div class="sign-up-form__wrapper d-flex justify-content-center col-12 pt-4">
+  <form novalidate action="" name="regForm" class="sign-up-form col-xs-12 col-sm-6 col-md-4 col-lg-3 border rounded pt-4 pb-4">
+    <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-3" ng-class="{'has-error': 'loginForm.email.$touched && 
+    loginForm.email.$invalid'}">
+        <label for="email">Login (e-mail)</label>
+        <input required name="email" type="email" 
+            class="col-xs-12 col-md-12 col-lg-12" 
+            placeholder="example@mail.com"
+            ng-model="su.newUser.email" 
+            />
+        <div class="help-block text-danger" ng-messages="regForm.email.$error" role="alert">
+          <div ng-message="email">This field must be a valid email address.</div>
+        </div>
+    </div>
+    <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-3"
+      ng-class="{'has-error': 'regForm.password.$touched && 
+      regForm.password.$invalid'}">
+      <label for="password">First Name</label>
+      <input ng-pattern="/^[A-Za-z]+$/" ng-maxlength="20" required name="firstname" type="text" 
+        class="col-xs-12 col-md-12 col-lg-12" 
+        placeholder="Tomas"
+        ng-model="su.newUser.firstName" 
+        />
+        <div class="help-block text-danger" ng-messages="regForm.firstname.$error" role="alert">
+          <div ng-message="pattern">Use only latin letters.</div>
+          <div ng-message= "maxlength">First name is too long.</div>
+        </div>
+    </div>
+    <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-3">
+      <label for="password">Last Name</label>
+      <input ng-pattern="/^[A-Za-z]+$/" ng-maxlength="20" required name="lastname" type="text" 
+        class="col-xs-12 col-md-12 col-lg-12" 
+        placeholder="Anderson"
+        ng-model="su.newUser.lastName" 
+        />
+        <div class="help-block text-danger" ng-messages="regForm.lastname.$error" role="alert">
+          <div ng-message="pattern">Use only latin letters.</div>
+          <div ng-message= "maxlength">Last name is too long.</div>
+        </div>
+    </div>
+    <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-3"
+          ng-class="{'has-error': 'regForm.password.$touched && 
+          regForm.password.$invalid'}">
+        <label for="password">Password</label>
+        <input required name="password" ng-minlength="6" type="password" 
+            class="col-xs-12 col-md-12 col-lg-12" 
+            placeholder="Password"
+            ng-model="su.newUser.password" 
+            />
+        <div class="help-block text-danger" ng-messages="regForm.password.$error" role="alert">
+          <div ng-message="minlength"> Password must include minimum 6 characters.</div>
+        </div>
+    </div>
+    <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12 mb-4">
+        <label>Confirm Password</label>
+        <input required type="password" 
+            class="col-xs-12 col-md-12 col-lg-12" 
+            placeholder="Password"
+            ng-model="su.newUser.passwordConfirmation" 
+            />
+        <small class="help-block text-danger" 
+            ng-show="su.newUser.passwordConfirmation !== su.newUser.password">
+          Passwords doesn't match
+        </small> <br>
+    </div>
+    <div class="form-group sign-up-form__group col-xs-12 col-md-12 col-lg-12">
+        <button ng-disabled="su.newUser.passwordConfirmation !== su.newUser.password" class="btn btn-info col-12" type="button" 
+        ng-click="su.addUser()">Sign Up</button>
+    </div>
+  </form>
 </div>

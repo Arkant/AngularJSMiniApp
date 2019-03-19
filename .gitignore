@@ -6,4 +6,8 @@ bower_components/
 true!ng-annotate/
 dist/
 package-lock.json
+functions
+env.js
+config.js
+functions
 env.js

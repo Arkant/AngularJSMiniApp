@@ -1,18 +1,23 @@
-function SignInController($scope, authenticationService) {
-  'ngInject';
-  $scope.warning = "";
-  $scope.signIn = () => {
-    const login = $scope.user.email;
-    const password = $scope.user.password;  
-    if (!authenticationService.signInToFirebase(login, password)) {
-      $scope.showWarning();
-    } else {
-      $scope.warning = "";
-    }
-  };
-  $scope.showWarning = () => {
-    $scope.warning = "Wrong E-mail or password"
-  }
-}
+'use strict';
 
+
+class SignInController {
+    constructor($scope, authenticationService, toastr) {
+        'ngInject';
+        this.scope = $scope;
+        this.authenticationService = authenticationService;
+        this.toastr = toastr;
+      }
+  
+    signIn () {
+      const { email, password } = this.scope.user;
+      
+      this.authenticationService.signInToFirebase(email, password)
+      .then(response => {
+        if (response) {
+          this.toastr.error(response.message);
+        }
+      });
+    }
+}
 export default SignInController;

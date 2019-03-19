@@ -1,31 +1,28 @@
-/* eslint-disable no-console */
 'use strict';
 
 import firebase from 'firebase';
-import 'angularfire';
-
-
-// // ==== connecting to firebase ====
-import configFirebase from '~/env.js'
-firebase.initializeApp(configFirebase);
-// // ================================
-
 
 export default function (app) {
   app
-    .service('authenticationService', function ($firebaseAuth, userProfileService, syncDataService, $location) {
+    .service('authenticationService', function ($firebaseAuth, userProfileService, syncDataService, $location, $rootScope) {
       'ngInject';
 
-      this.signUpToFirebase = (email, password) => {
-        const auth = $firebaseAuth(firebase.auth());
-        auth.$createUserWithEmailAndPassword(email, password)
+      this.signUpToFirebase = user => {
+        
+        $rootScope.auth = $firebaseAuth(firebase.auth());
+
+        return $rootScope.auth.$createUserWithEmailAndPassword(user.email, user.password)
           .then(function(firebaseUser) {
-            userProfileService.createNewUser(email, firebaseUser.user.uid);
-            syncDataService.saveUserInfoToFirebase(firebaseUser.user.uid);
+            userProfileService.createNewUser(user, firebaseUser.user.uid);
+
+            return syncDataService.saveCurrentUserToFirebase();
+          })
+          .then(function() {
+            $location.path('/home')
           })
           .catch(function(error) {
-            console.log('error: ', error)
-          })
+            return error;
+          });
       };
 
       // this.getUserFromLocalStorage = () => {
@@ -37,14 +34,33 @@ export default function (app) {
       // }
 
       this.signInToFirebase = (email, password) => {
-        const auth = $firebaseAuth(firebase.auth());
-        auth.$signInWithEmailAndPassword(email, password)
-          .then(function() {
-            $location.path('/#!/home')
+        $rootScope.auth = $firebaseAuth(firebase.auth());
+
+        return $rootScope.auth.$signInWithEmailAndPassword(email, password)
+          .then(function(data) {
+            $rootScope.currentUserId = data.user.uid;
+            return syncDataService.getUserFromFirebase(data.user.uid);
+          })
+          .then(function(user) {
+            $rootScope.currentUser = user;
+            $location.path('/home');
           })
           .catch(function(error) {
-            console.log('error: ', error)
+            return error;
           })
       };
+
+
+      this.signOutFromFirebase = () => {
+        $rootScope.auth.$signOut()
+          .then(function() {
+            $rootScope.auth = null;
+            $rootScope.currentUser = null;
+            $rootScope.currentUserId = null;
+            $rootScope.currentUserDeals = null;
+            $rootScope.listOfUsers = null;
+            $location.path('/sign-in')
+          })
+      }
     })
 }

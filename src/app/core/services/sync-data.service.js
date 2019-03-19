@@ -2,14 +2,6 @@
 'use strict';
 
 import firebase from 'firebase';
-import 'angularfire';
-
-
-// ==== connecting to firebase ====
-// import configFirebase from '~/env.js'
-// firebase.initializeApp(configFirebase);
-// ================================
-
 
 export default function (app) {
   app
@@ -29,16 +21,18 @@ export default function (app) {
         return $rootScope.currentUserDeals;
       };
 
-      this.getUserInfoFromFirebase = uid => {
+      this.getUserFromFirebase = uid => {
         const ref = firebase.database().ref();
-        $rootScope.currentUser = $firebaseObject(ref.child('listOfUsers').child(uid));
+        const user = $firebaseObject(ref.child('listOfUsers').child(uid));
+        return user.$loaded();
       }
 
-      this.saveUserInfoToFirebase = uid => {
+      this.saveCurrentUserToFirebase = () => {
+        const { uid, firstName, lastName, phone, email, role, ava } = $rootScope.currentUser;
         const ref = firebase.database().ref();
-        ref.child('listOfUsers').update({
-          [uid]: $rootScope.currentUser
-        })
+        return ref.child('listOfUsers')
+        .child(uid)
+        .update({ uid, firstName, lastName, phone, email, role, ava })
       }
 
       this.getAllFromFirebase = () => {
@@ -54,17 +48,33 @@ export default function (app) {
       }
 
       this.getAllUsersFromFirebase = () => {
+        $rootScope.listOfUsers = {};
         const ref = firebase.database().ref();
         $rootScope.listOfUsers = $firebaseObject(ref.child('listOfUsers'));
-        $rootScope.listOfUsers.$loaded()
-          .then(console.log($rootScope.listOfUsers));
+        return $rootScope.listOfUsers.$loaded()
+          .then(() => {
+            console.log($rootScope.listOfUsers)
+          });
       }
 
-      this.getAllDealsFromFirebase = () => {
+
+      this.getCheckedUserDealsFromFirebase = uid => {
         const ref = firebase.database().ref();
-        $rootScope.listOfDeals = $firebaseObject(ref.child('listOfDeals'));
-        $rootScope.listOfDeals.$loaded()
-          .then(console.log($rootScope.listOfDeals));
+        return $firebaseArray(ref.child('listOfDeals').child(uid));
+      }
+
+      this.getProfileImageRef = () => {
+        const ref = firebase.storage().ref()
+          .child('currency-converter/profile-pictures')
+          .child($rootScope.currentUserId)
+        return ref.getDownloadURL();
+      }
+
+      this.uploadProfileImage = file => {
+        const ref = firebase.storage().ref()
+          .child('currency-converter/profile-pictures')
+          .child($rootScope.currentUserId);
+        return ref.put(file)
       }
     })
 }

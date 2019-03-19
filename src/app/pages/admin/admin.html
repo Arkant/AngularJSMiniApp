@@ -1,65 +1,14 @@
+<preloader show="admCont.listOfUsers === undefined || !admCont.listOfUsers.$resolved"></preloader>
+
 <div class="container">
   <div class="header">
     <h1 class="display-4 text-center">Admin Page</h1>
   </div>
   <div class="table-wrapper-scroll-y my-custom-scrollbar">
-    <table class="table table-striped rounded table-hover">
-      <thead>
-        <tr>
-          <th custom-sort order="'id'" sort="sort">
-            Id
-          </th>
-
-          <th custom-sort order="'name'" sort="sort">
-            Name
-          </th>
-
-          <th custom-sort order="'login'" sort="sort">
-            E-mail
-          </th>
-          
-          <!-- <th custom-sort order="'status'" sort="sort">
-            Status
-          </th> -->
-
-          <th custom-sort order="'field5'" sort="sort">
-            Admin
-          </th>
-
-          <th custom-sort order="'password'" sort="sort">
-            Password
-          </th>
-
-          <th>
-            History
-          </th>
-
-          <th>
-            Profile
-          </th>              
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr ng-repeat="item in filteredItems | orderBy:sort.sortingOrder:sort.reverse">
-          <td>{{ item.id }}</td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.login }}</td>
-          <td>
-            <div class="make-switch switch-mini">
-              <label><input type="checkbox" checked></label>
-            </div>
-          </td>
-          <td><div class="input-group mb-2 justify-content-center">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" ng-click='admCont.resetPsw(item.id)'>Reset password</button>
-              </div>
-            </div>
-          </td>
-          <td><i class="fas fa-history tabble__icon" ng-click="admCont.setSelectedUser(item.id)" ui-sref="transactionsList"></i></td>
-          <td><i class="fas fa-user-circle tabble__icon" ui-sref="profile"></i></td>
-        </tr>
-      </tbody>
-    </table>
+    <custom-table headers='admCont.headers' data='admCont.listOfUsers' sort='admCont.sort' admin-table='admCont.adm'
+      change-user-role='admCont.changeUserRole(data)' reset-psw="admCont.resetPsw(data)"
+      set-selected-user="admCont.setSelectedUser(data)"></custom-table>
   </div>
 </div>
+
+<admin-modal-component></admin-modal-component>
