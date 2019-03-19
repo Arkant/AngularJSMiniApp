@@ -11,6 +11,18 @@ function routeConfig($urlRouterProvider, $stateProvider, resolverProvider) {
 
 
     $stateProvider
+        .state('main', {
+          url: '/',
+          templateUrl: signInTemplate,
+          controller: 'SignInController',
+          controllerAs: 'signInCtrl',
+          resolve: {
+            asyncPreloading: resolverProvider.signInPagePreloading
+          },
+          data: {
+            role: []
+          }
+        })
         .state('profile', {
           url: '/profile',
           templateUrl: profileTemplate,

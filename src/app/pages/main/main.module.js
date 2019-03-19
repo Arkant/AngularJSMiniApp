@@ -5,16 +5,19 @@ import MainComponent from './main.component';
 const mainPageModule = angular.module('main-module', [
     'ui.router'
 ])
-    .config(($stateProvider, $urlRouterProvider) => {
+    .config($urlRouterProvider => {
         'ngInject';
 
         $urlRouterProvider.otherwise('/');
+<<<<<<< Updated upstream
 
         $stateProvider
             .state('main', {
                 url: '/',
                 component: 'main'
             });
+=======
+>>>>>>> Stashed changes
     })
     .component('main', new MainComponent());
 
