@@ -3,7 +3,6 @@
 
 import profileTemplate from '!!file-loader?name=templates/[name].[ext]!./pages/profile/profile.html';
 import editProfileTemplate from '!!file-loader?name=templates/[name].[ext]!./pages/edit-profile/edit-profile.html';
-import transactionsListTemplate from '!!file-loader?name=templates/[name].[ext]!./pages/transactions-list/transactions-list.html';
 import signInTemplate from '!!file-loader?name=templates/[name].[ext]!./pages/sign-in/sign-in.html';
 import signUpTemplate from '!!file-loader?name=templates/[name].[ext]!./pages/sign-up/sign-up.html';
 import adminTemplate from '!!file-loader?name=templates/[name].[ext]!./pages/admin/admin.html';
