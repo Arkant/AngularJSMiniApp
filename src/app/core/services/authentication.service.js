@@ -25,13 +25,6 @@ export default function (app) {
           });
       };
 
-      // this.getUserFromLocalStorage = () => {
-      //   const user = '';
-      //   if (user === "") {
-      //     localStorage.getItem(user)
-      //     console.log(user);
-      //   }
-      // }
 
       this.signInToFirebase = (email, password) => {
         $rootScope.auth = $firebaseAuth(firebase.auth());

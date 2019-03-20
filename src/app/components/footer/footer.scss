@@ -6,6 +6,11 @@ footer-test {
     height: 60px;
 
     padding: 15px 0;
-    color: white;
     background-color: #007bff;
+
+    .nav-link {
+        line-height: 18px;
+        color: #fff;
+        cursor: pointer;
+    } 
 }

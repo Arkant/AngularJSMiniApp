@@ -2,11 +2,15 @@
 
 
 class SignInController {
-    constructor($scope, authenticationService, toastr) {
+    constructor($scope, authenticationService, toastr, $rootScope) {
         'ngInject';
         this.scope = $scope;
         this.authenticationService = authenticationService;
         this.toastr = toastr;
+
+        $rootScope.$on('logOut', function() {
+            authenticationService.signOutFromFirebase();
+        })
       }
   
     signIn () {

@@ -4,7 +4,7 @@
 
       <h3 class="navbar-brand col-md-5">CC App</h3>
       
-      <ul class="navbar-nav col-md-7">
+      <ul class="navbar-nav col-md-7 d-flex flex-row">
         <li class="nav-item" ng-repeat='value in headerCtrl.menu track by value.name '>
           <a class="nav-link" ui-sref="{{ value.link }}" ui-sref-active="active">{{ value.name }}</a>
         </li>

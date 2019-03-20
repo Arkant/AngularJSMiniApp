@@ -2,7 +2,7 @@
   <div class="header">
     <h1 class="display-4 text-center">Admin Page</h1>
   </div>
-  <div class="table-responsive">
+  <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar">
     <custom-table headers='admCont.headers' data='admCont.listOfUsers' sort='admCont.sort' admin-table='admCont.adm'
       change-user-role='admCont.changeUserRole(userObject)' reset-psw="admCont.resetPsw(id, email)"
       set-selected-user="admCont.setSelectedUser(id)"></custom-table>

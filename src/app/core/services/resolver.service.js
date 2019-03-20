@@ -44,6 +44,19 @@ export default function (app) {
             return deferred.promise;
         };
 
+        this.signUpPagePreloading = () => {
+            const deferred = $q.defer();
+            require.ensure([], require => {
+                const signUpModule = require('../../pages/sign-up/sign-up.module');
+                $ocLazyLoad.load({
+                    name: signUpModule.default.name,
+                });
+                deferred.resolve(signUpModule.default.controller);
+            });
+
+            return deferred.promise;
+        };
+
         this.signInPagePreloading = () => {
             const deferred = $q.defer();
             require.ensure([], require => {
