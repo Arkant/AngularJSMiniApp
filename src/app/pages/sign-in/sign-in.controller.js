@@ -24,9 +24,5 @@ class SignInController {
         }
       });
     }
-
-    goToSignUp() {
-      this.state.go('sign-up');
-    }
 }
 export default SignInController;
