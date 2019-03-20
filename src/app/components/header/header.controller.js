@@ -1,10 +1,11 @@
 'use strict';
 
 export default class HeaderController{
-    constructor ($rootScope, roles) {
+    constructor ($rootScope, roles, authenticationService) {
         'ngInject';   
         this.menu = null;
         this.roles = roles;
+        this.authenticationService = authenticationService;
             
         if ($rootScope.currentUser) {   
             this.currentUser = $rootScope.currentUser;
@@ -44,5 +45,9 @@ export default class HeaderController{
                 { name: 'Admin', link: 'admin' },
             ];
         }
+    } 
+
+    logOut() {
+        this.authenticationService.signOutFromFirebase(); 
     } 
 }
