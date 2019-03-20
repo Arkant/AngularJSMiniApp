@@ -2,7 +2,7 @@
 
 export default function (app) {
   app
-    .service('userProfileService', function (usersMocksService, syncDataService, $rootScope, $log, roles) {
+    .service('userProfileService', function (syncDataService, $rootScope, $log, roles) {
       'ngInject';
 
       class User {

@@ -12,7 +12,6 @@ import phone from './directives/phone/phone.directive';
 import constants from './services/constants';
 import storeFactory from './services/store.factory';
 import sharedAdminFactory from './services/share-admin.factory';
-import usersMocksService from './services/user.mocks.service';
 import resolverService from './services/resolver.service';
 
 
@@ -36,7 +35,6 @@ phone(shared);
 constants(shared);
 storeFactory(shared);
 sharedAdminFactory(shared);
-usersMocksService(shared);
 resolverService(shared);
 customSort(shared)
 

@@ -1,8 +1,8 @@
 'use strict';
 export default class EditProfileController {
-  constructor($log, $scope, $rootScope, userProfileService, syncDataService, $state, toastr) {
+  constructor($scope, $rootScope, userProfileService, syncDataService, $state, toastr) {
     'ngInject'
-    this.$log = $log;
+
     this.scope = $scope;
     this.toastr = toastr;
     this.currentUserId = $rootScope.currentUserId;

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 'use strict';
 
 import firebase from 'firebase';
@@ -43,8 +42,7 @@ export default function (app) {
           .then(function() {
             $rootScope.fullBase.listOfUsers = obj.listOfUsers;
             $rootScope.fullBase.listOfDeals = obj.listOfDeals;
-          })
-          .then(console.log($rootScope.fullBase));
+          });
       }
 
       this.getAllUsersFromFirebase = () => {

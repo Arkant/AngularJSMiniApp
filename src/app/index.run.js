@@ -1,7 +1,7 @@
 'use strict';
 
 // eslint-disable-next-line no-unused-vars
-function runBlock($rootScope, $log, $transitions, authenticationService) {
+function runBlock($rootScope, $transitions, authenticationService) {
 	'ngInject';
 	
 	const limitedPermission = {
@@ -10,8 +10,6 @@ function runBlock($rootScope, $log, $transitions, authenticationService) {
 
 
 	$transitions.onBefore(limitedPermission, function(transition) {
-		$log.log(transition)
-
 		const toSignPage = transition.to().name === 'sign-in' || transition.to().name === 'sign-up';
 
 		const toAdminPages = transition.to().name === 'admin' || transition.to().name === 'transactionsList';

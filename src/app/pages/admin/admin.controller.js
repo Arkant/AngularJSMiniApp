@@ -1,11 +1,10 @@
 'use strict';
 
 export default class AdminController {
-    constructor($rootScope, syncDataService, adminService, sharedAdminFactory, roles, $log) {
+    constructor($rootScope, syncDataService, adminService, sharedAdminFactory, roles) {
         'ngInject';
 
         this.rootScope = $rootScope;
-        this.log = $log;
         this.roles = roles;
         this.syncDataService = syncDataService;
         this.adminService = adminService;
