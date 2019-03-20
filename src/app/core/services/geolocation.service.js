@@ -5,9 +5,9 @@ export default function (app) {
     .service('geolocationService', function (geolocation) {
         'ngInject';
 
-        this.getCoordinates = () => geolocation.getLocation().then(data => ({
-            lat: data.coords.latitude,
-            long: data.coords.longitude
+        this.getCoordinates = () => geolocation.getLocation().then(({ coords }) => ({
+            lat: coords.latitude,
+            long: coords.longitude
         }))
     });
 }
