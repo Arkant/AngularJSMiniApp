@@ -16,8 +16,8 @@ export default class AdminController {
             reverse: false
         }
         this.adm = true;
-        this.listOfUsers = this.adminService.usersData.map(({ userId, firstName, lastName, email, phone, role }) => ({
-            userId,
+        this.listOfUsers = this.adminService.usersData.map(({ uid, firstName, lastName, email, phone, role }) => ({
+            uid,
             firstName,
             lastName,
             email,
@@ -31,14 +31,14 @@ export default class AdminController {
         this.sharedAdminFactory.setUserData(id);
     }
 
-    resetPsw(userId, email) {
-        this.adminService.resetUserPassword({ uid: userId, newPassword: email });
+    resetPsw(uid, email) {
+        this.adminService.resetUserPassword({ uid: uid, newPassword: email });
 
     }
 
     changeUserRole(userObject) { 
         const newRole = userObject.role === this.roles.ADMIN ? this.roles.USER : this.roles.ADMIN;
-        this.adminService.changeUserRole(userObject.userId, newRole)
+        this.adminService.changeUserRole(userObject.uid, newRole)
         userObject.role = newRole
     }
 }

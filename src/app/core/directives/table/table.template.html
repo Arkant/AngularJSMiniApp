@@ -14,11 +14,11 @@
         <input type="checkbox" ng-checked="el.role === 'admin'" ng-click='changeUserRole({ userObject: el })'>
       </td>
       <td ng-show='adminTable'>
-        <button class="btn btn-sm btn-outline-danger" type="button" ng-click='resetPsw({id:el.userId, email:el.email})'>Reset</button>
+        <button class="btn btn-sm btn-outline-danger" type="button" ng-click='resetPsw({id:el.uid, email:el.email})'>Reset</button>
       </td>
 
       <td ng-show='adminTable'><i class="fas fa-history tabble__icon" data-toggle="modal"
-          ng-click="setSelectedUser({id:el.userId})" data-target="#userHistoryModal"></i></td>
+          ng-click="setSelectedUser({id:el.uid})" data-target="#userHistoryModal"></i></td>
     </tr>
   </tbody>
 </table>
