@@ -32,7 +32,7 @@ export default class AdminController {
     }
 
     resetPsw(uid, email) {
-        this.adminService.resetUserPassword({ uid: uid, newPassword: email });
+        this.adminService.resetUserPassword({ uid, newPassword: email });
 
     }
 
