@@ -40,14 +40,15 @@ export default class WeatherController {
     }
 
     getForecastForLocal() {
-      this.geolocationService.getCoordinates().then(coords => {
-        this.weatherAPIService.getForecast(coords)
-        .then(data => {
+      this.geolocationService.getCoordinates()
+        .then(coords => {
           this.localStorageService.setCoordinates(coords);
+          return this.weatherAPIService.getForecast(coords)
+        })
+        .then(data => {
           this.selectedLocation = `${data.city}, ${data.country}`;
           this.weatherData = data;
         });
-      });
     }
 
     $onInit() {
